@@ -1,8 +1,9 @@
 (() => {
   "use strict";
 
-  // A 42 that is not part of a bigger number or a decimal (1942, 420, 0.42, 42,5).
-  const STANDALONE_42 = /(?<!\d)(?<!\d[.,])42(?!\d)(?![.,]\d)/g;
+  // A 42 that is not part of a bigger number or a decimal (1942, 420, 0.42, 42,5),
+  // not stuck to a letter (A42, 42km) and not negative (-42 stays -42).
+  const STANDALONE_42 = /(?<![\p{L}\d\-−])(?<!\d[.,])42(?![\p{L}\d])(?![.,]\d)/gu;
   const REPLACEMENT = "41 + 1";
   const WARNING = "attention au 41 + 1";
   const SKIP_TAGS = new Set(["script", "style", "noscript", "textarea"]);
